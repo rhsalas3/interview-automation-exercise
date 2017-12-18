@@ -92,9 +92,49 @@ public class MortgageCalculatorInputPage {
          *
          * @param homeValue String - the value of the home.
          */
-        public void setLengthOfLoan(final String homeValue) {
+        public void setHomeValue(final String homeValue) {
             homeValueInput().enter(homeValue);
         }
 
-}
+        /*
+         * Enter the 'Annual Taxes' value as a dollar amount.
+         *
+         * @param taxesAsAmount String - the whole dollar amount of annual taxes paid.
+         */
+        public void setAnnualTaxes(final String taxesAsAmount) {
+            annualTaxesInput().enter(taxesAsAmount);
+        }
 
+        /*
+         * Enter the 'Annual Insurance' value as a dollar amount.
+         *
+         * @param insurancePaid String - the whole dollar amount of annual insurance paid.
+         */
+        public void setAnnualInsurance(final String insurancePaid) {
+            annualInsuranceInput().enter(insurancePaid);
+        }
+
+        /*
+         * Enter the 'Annual PMI' value as a percentage.
+         *
+         * @param pmiAmount String - the annual PMI percentage.
+         */
+        public void setAnnualPmi(final String pmiAmount) {
+            annualPmiInput().enter(pmiAmount);
+        }
+
+        /*
+         * Click the 'Next' button.
+         */
+        public void clickNextButton() {
+            nextButton().click();
+        }
+
+        /*
+         * Click the 'Show Results' button.
+         */
+        public void clickShowResultsButton() {
+            showResultsButton().click();
+        }
+
+}
