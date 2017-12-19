@@ -1,4 +1,6 @@
-import java.src.main.MortgageCalculatorPage;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VerifyExpectedMonthlyLoanPayment {
 
@@ -46,23 +48,39 @@ public class VerifyExpectedMonthlyLoanPayment {
         calculatorPage = new MortgageCalculatorPage();
     }
 
-    public void main (String[] args) {
+    @Test
+    public void testMortgageCalculator() {
         // Run test setup.
         setup();
 
         // Enter in the "Loan Information" and the "Home Value".
+        assertTrue(calculatorPage.atLoansInformationInputPage(), "Expected to be at the 'Loan Information' step.");
+        calculatorPage.setLoanAmount(loanAmount);
+        calculatorPage.setInterestRate(interestRate);
+        calculatorPage.setLengthOfLoan(lengthOfLoan);
+        calculatorPage.setHomeValue(homeValue);
         
         // Click the 'Next' button and verify that we are at the next step in the process.
+        calculatorPage.clickNextButton();
+        assertTrue(calculatorPage.atTaxesAndInsuranceInputPage(), "Expected to be at the 'Taxes & Information' step.");
         
         // Enter in the "Taxes and Insurance" information.
-        
+        calculatorPage.setAnnualInsurance(annualInsurance);
+        calculatorPage.setAnnualTaxes(annualTaxes);
+        calculatorPage.setAnnualPmi(annualPmiPercentage);
+
         // Click the 'Show Results' button and verify that the results are showing.
+        calculatorPage.clickShowResultsButton();
+        assertTrue(calculatorPage.atResultsPage(), "Expected the results to appear.");
         
         // Verify that the "Monthly Principle and Interests" are as expected.
         
         // Verify that the "Loan To Value Ratio" is as expected.
         
         // Verify that the "Total Monthly Payments" are as expected.
+
+        // End the test by closing the web driver.
+        calculatorPage.quitDriver();
     }
 
 }

@@ -1,156 +1,177 @@
-public class MortgageCalculatorInputPage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-        /*
-         * Determine whether or not the calculator is at the "Loan Information" step.
-         */
-        public boolean atLoansInformationInputPage() {
-            return nextButton().isDisplayed();
-        }
+/**
+ * Class representing the https://www.mortgageloan.com/calculator page.
+ */
+public class MortgageCalculatorPage {
 
-        /*
-         * Determine whether or not the calculator is at the "Taxes and Insurance Information" step.
-         */
-        public boolean atTaxesAndInsuranceInputPage() {
-            return showResultsButton().isDisplayed();
-        }
+    private static WebDriver chromeDriver = new ChromeDriver();
 
-        /*
-         * Determine whether or not the calculator is displaying the results.
-         */
-        public boolean atResultsPage() {
-            return nextButton().isDisplayed();
-        }
+    /**
+     * Default constructor.
+     */
+    public MortgageCalculatorPage() {
+        chromeDriver.get("https://www.mortgageloan.com/calculator");
+    }
 
-        //////////////////////////////////////////////////////////
-        // Elements of the page.
-        //////////////////////////////////////////////////////////
+    public void quitDriver() {
+        chromeDriver.quit();
+    }
 
-        private WebElement nextButton() {
-            return driver.findElement(By.cssSelector("#calculator-form > div > ul > li.next > a.next-button"));
-        }
+    /**
+     * Determine whether or not the calculator is at the "Loan Information" step.
+     */
+    public boolean atLoansInformationInputPage() {
+        return nextButton().isDisplayed();
+    }
 
-        private WebElement showResultsButton() {
-            return driver.findElement(By.cssSelector("#calculator-form > div > ul > li.finish > a.finish-button"));
-        }
+    /**
+     * Determine whether or not the calculator is at the "Taxes and Insurance Information" step.
+     */
+    public boolean atTaxesAndInsuranceInputPage() {
+        return showResultsButton().isDisplayed();
+    }
 
-        private WebElement loanAmountInput() {
-            return driver.findElement(By.id("calculator_widget_amount"));
-        }
+    /**
+     * Determine whether or not the calculator is displaying the results.
+     */
+    public boolean atResultsPage() {
+        return nextButton().isDisplayed();
+    }
 
-        private WebElement lengthOfLoanInput() {
-            return driver.findElement(By.id("calculator_widget_Length"));
-        }
+    //////////////////////////////////////////////////////////
+    // Elements of the page.
+    //////////////////////////////////////////////////////////
 
-        private WebElement interestRateInput() {
-            return driver.findElement(By.id("calculator_widget_interest"));
-        }
+    private WebElement nextButton() {
+        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.next > a.next-button"));
+    }
 
-        private WebElement homeValueInput() {
-            return driver.findElement(By.id("calculator_widget_HomeValue"));
-        }
+    private WebElement showResultsButton() {
+        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.finish > a.finish-button"));
+    }
 
-        private WebElement annualTaxesInput() {
-            return driver.findElement(By.id("calculator_widget_PropertyTaxes"));
-        }
+    private WebElement loanAmountInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_amount"));
+    }
 
-        private WebElement annualInsuranceInput() {
-            return driver.findElement(By.id("calculator_widget_Insurance"));
-        }
+    private WebElement lengthOfLoanInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_Length"));
+    }
 
-        private WebElement annualPmiInput() {
-            return driver.findElement(By.id("calculator_widget_PMI"));
-        }
-        
-        private WebElement monthlyPaymentResultLabel() {
-            return driver.findElement(By.cssSelector("#calculator_result > div.cta-amount"));
-        }
+    private WebElement interestRateInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_interest"));
+    }
 
-        //////////////////////////////////////////////////////////
-        // Helper methods.
-        //////////////////////////////////////////////////////////
+    private WebElement homeValueInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_HomeValue"));
+    }
 
-        /*
-         * Enter the 'Loan Amount' value.
-         *
-         * @param loanAmount String - the amount requested for the loan, as whole dollars.
-         */
-        public void setLoanAmount(final String loanAmount) {
-            loanAmountInput().enter(loanAmount);
-        }
+    private WebElement annualTaxesInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_PropertyTaxes"));
+    }
 
-        /*
-         * Enter the 'Interest Rate' percentage.
-         *
-         * @param rate String - the interest rate as a percentage.
-         */
-        public void setInterestRate(final String rate) {
-            interestRateInput().enter(rate);
-        }
+    private WebElement annualInsuranceInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_Insurance"));
+    }
 
-        /*
-         * Enter the length of time the loan is for.
-         *
-         * @param length String - the length of time in years.
-         */
-        public void setLengthOfLoan(final String length) {
-            lengthOfLoanInput().enter(length);
-        }
+    private WebElement annualPmiInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_PMI"));
+    }
 
-        /*
-         * Enter the value of the home to be mortgaged.
-         *
-         * @param homeValue String - the value of the home.
-         */
-        public void setHomeValue(final String homeValue) {
-            homeValueInput().enter(homeValue);
-        }
+    private WebElement monthlyPaymentResultLabel() {
+        return chromeDriver.findElement(By.cssSelector("#calculator_result > div.cta-amount"));
+    }
 
-        /*
-         * Enter the 'Annual Taxes' value as a dollar amount.
-         *
-         * @param taxesAsAmount String - the whole dollar amount of annual taxes paid.
-         */
-        public void setAnnualTaxes(final String taxesAsAmount) {
-            annualTaxesInput().enter(taxesAsAmount);
-        }
+    //////////////////////////////////////////////////////////
+    // Helper methods.
+    //////////////////////////////////////////////////////////
 
-        /*
-         * Enter the 'Annual Insurance' value as a dollar amount.
-         *
-         * @param insurancePaid String - the whole dollar amount of annual insurance paid.
-         */
-        public void setAnnualInsurance(final String insurancePaid) {
-            annualInsuranceInput().enter(insurancePaid);
-        }
+    /**
+     * Enter the 'Loan Amount' value.
+     *
+     * @param loanAmount String - the amount requested for the loan, as whole dollars.
+     */
+    public void setLoanAmount(final String loanAmount) {
+        loanAmountInput().sendKeys(loanAmount);
+    }
 
-        /*
-         * Enter the 'Annual PMI' value as a percentage.
-         *
-         * @param pmiAmount String - the annual PMI percentage.
-         */
-        public void setAnnualPmi(final String pmiAmount) {
-            annualPmiInput().enter(pmiAmount);
-        }
+    /**
+     * Enter the 'Interest Rate' percentage.
+     *
+     * @param rate String - the interest rate as a percentage.
+     */
+    public void setInterestRate(final String rate) {
+        interestRateInput().sendKeys(rate);
+    }
 
-        /*
-         * Click the 'Next' button.
-         */
-        public void clickNextButton() {
-            nextButton().click();
-        }
+    /**
+     * Enter the length of time the loan is for.
+     *
+     * @param length String - the length of time in years.
+     */
+    public void setLengthOfLoan(final String length) {
+        lengthOfLoanInput().sendKeys(length);
+    }
 
-        /*
-         * Click the 'Show Results' button.
-         */
-        public void clickShowResultsButton() {
-            showResultsButton().click();
-        }
-        
-        /*
-         * Retrieve the "Your Monthly Payments Could Be" amount displayed on the results page.
-         */
-        public String getMonthlyPaymentResult() {
-            return monthlyPaymentResultLabel().getText();
-        }
+    /**
+     * Enter the value of the home to be mortgaged.
+     *
+     * @param homeValue String - the value of the home.
+     */
+    public void setHomeValue(final String homeValue) {
+        homeValueInput().sendKeys(homeValue);
+    }
+
+    /**
+     * Enter the 'Annual Taxes' value as a dollar amount.
+     *
+     * @param taxesAsAmount String - the whole dollar amount of annual taxes paid.
+     */
+    public void setAnnualTaxes(final String taxesAsAmount) {
+        annualTaxesInput().sendKeys(taxesAsAmount);
+    }
+
+    /**
+     * Enter the 'Annual Insurance' value as a dollar amount.
+     *
+     * @param insurancePaid String - the whole dollar amount of annual insurance paid.
+     */
+    public void setAnnualInsurance(final String insurancePaid) {
+        annualInsuranceInput().sendKeys(insurancePaid);
+    }
+
+    /**
+     * Enter the 'Annual PMI' value as a percentage.
+     *
+     * @param pmiAmount String - the annual PMI percentage.
+     */
+    public void setAnnualPmi(final String pmiAmount) {
+        annualPmiInput().sendKeys(pmiAmount);
+    }
+
+    /**
+     * Click the 'Next' button.
+     */
+    public void clickNextButton() {
+        nextButton().click();
+    }
+
+    /**
+     * Click the 'Show Results' button.
+     */
+    public void clickShowResultsButton() {
+        showResultsButton().click();
+    }
+
+    /**
+     * Retrieve the "Your Monthly Payments Could Be" amount displayed on the results page.
+     */
+    public String getMonthlyPaymentResult() {
+        return monthlyPaymentResultLabel().getText();
+    }
 
 }
