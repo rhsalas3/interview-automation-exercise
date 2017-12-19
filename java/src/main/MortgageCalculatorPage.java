@@ -1,18 +1,23 @@
 public class MortgageCalculatorInputPage {
 
         /*
-         *
+         * Determine whether or not the calculator is at the "Loan Information" step.
          */
-        public boolean atTaxesAndInsuranceInputPage() {
+        public boolean atLoansInformationInputPage() {
             return nextButton().isDisplayed();
         }
 
-        // TODO: Could be useful to use the page's url... driver.getURL() ??
+        /*
+         * Determine whether or not the calculator is at the "Taxes and Insurance Information" step.
+         */
+        public boolean atTaxesAndInsuranceInputPage() {
+            return showResultsButton().isDisplayed();
+        }
 
         /*
-         *
+         * Determine whether or not the calculator is displaying the results.
          */
-        public boolean atLoansInformationInputPage() {
+        public boolean atResultsPage() {
             return nextButton().isDisplayed();
         }
 
@@ -54,6 +59,10 @@ public class MortgageCalculatorInputPage {
 
         private WebElement annualPmiInput() {
             return driver.findElement(By.id("calculator_widget_PMI"));
+        }
+        
+        private WebElement monthlyPaymentResultLabel() {
+            return driver.findElement(By.cssSelector("#calculator_result > div.cta-amount"));
         }
 
         //////////////////////////////////////////////////////////
@@ -135,6 +144,13 @@ public class MortgageCalculatorInputPage {
          */
         public void clickShowResultsButton() {
             showResultsButton().click();
+        }
+        
+        /*
+         * Retrieve the "Your Monthly Payments Could Be" amount displayed on the results page.
+         */
+        public String getMonthlyPaymentResult() {
+            return monthlyPaymentResultLabel().getText();
         }
 
 }
