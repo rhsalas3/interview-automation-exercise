@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 public class VerifyExpectedMonthlyLoanPayment {
 
@@ -54,7 +54,7 @@ public class VerifyExpectedMonthlyLoanPayment {
         setup();
 
         // Enter in the "Loan Information" and the "Home Value".
-        assertTrue(calculatorPage.atLoansInformationInputPage(), "Expected to be at the 'Loan Information' step.");
+        assertTrue("Expected to be at the 'Loan Information' step.", calculatorPage.atLoansInformationInputPage());
         calculatorPage.setLoanAmount(loanAmount);
         calculatorPage.setInterestRate(interestRate);
         calculatorPage.setLengthOfLoan(lengthOfLoan);
@@ -62,7 +62,7 @@ public class VerifyExpectedMonthlyLoanPayment {
         
         // Click the 'Next' button and verify that we are at the next step in the process.
         calculatorPage.clickNextButton();
-        assertTrue(calculatorPage.atTaxesAndInsuranceInputPage(), "Expected to be at the 'Taxes & Information' step.");
+        assertTrue("Expected to be at the 'Taxes & Information' step.", calculatorPage.atTaxesAndInsuranceInputPage());
         
         // Enter in the "Taxes and Insurance" information.
         calculatorPage.setAnnualInsurance(annualInsurance);
@@ -71,7 +71,7 @@ public class VerifyExpectedMonthlyLoanPayment {
 
         // Click the 'Show Results' button and verify that the results are showing.
         calculatorPage.clickShowResultsButton();
-        assertTrue(calculatorPage.atResultsPage(), "Expected the results to appear.");
+        assertTrue("Expected the results to appear.", calculatorPage.atResultsPage());
         
         // Verify that the "Monthly Principle and Interests" are as expected.
         

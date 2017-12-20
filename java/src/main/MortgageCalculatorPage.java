@@ -96,6 +96,7 @@ public class MortgageCalculatorPage {
      * @param loanAmount String - the amount requested for the loan, as whole dollars.
      */
     public void setLoanAmount(final String loanAmount) {
+        loanAmountInput().clear();
         loanAmountInput().sendKeys(loanAmount);
     }
 
@@ -105,6 +106,7 @@ public class MortgageCalculatorPage {
      * @param rate String - the interest rate as a percentage.
      */
     public void setInterestRate(final String rate) {
+        interestRateInput().clear();
         interestRateInput().sendKeys(rate);
     }
 
@@ -114,6 +116,7 @@ public class MortgageCalculatorPage {
      * @param length String - the length of time in years.
      */
     public void setLengthOfLoan(final String length) {
+        lengthOfLoanInput().clear();
         lengthOfLoanInput().sendKeys(length);
     }
 
@@ -123,6 +126,7 @@ public class MortgageCalculatorPage {
      * @param homeValue String - the value of the home.
      */
     public void setHomeValue(final String homeValue) {
+        homeValueInput().clear();
         homeValueInput().sendKeys(homeValue);
     }
 
@@ -132,6 +136,7 @@ public class MortgageCalculatorPage {
      * @param taxesAsAmount String - the whole dollar amount of annual taxes paid.
      */
     public void setAnnualTaxes(final String taxesAsAmount) {
+        annualTaxesInput().clear();
         annualTaxesInput().sendKeys(taxesAsAmount);
     }
 
@@ -141,6 +146,7 @@ public class MortgageCalculatorPage {
      * @param insurancePaid String - the whole dollar amount of annual insurance paid.
      */
     public void setAnnualInsurance(final String insurancePaid) {
+        annualInsuranceInput().clear();
         annualInsuranceInput().sendKeys(insurancePaid);
     }
 
@@ -150,6 +156,7 @@ public class MortgageCalculatorPage {
      * @param pmiAmount String - the annual PMI percentage.
      */
     public void setAnnualPmi(final String pmiAmount) {
+        annualPmiInput().clear();
         annualPmiInput().sendKeys(pmiAmount);
     }
 
