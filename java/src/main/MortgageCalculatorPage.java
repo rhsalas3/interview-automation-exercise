@@ -14,11 +14,13 @@ public class MortgageCalculatorPage {
     private static WebDriver chromeDriver = new ChromeDriver();
 
     /**
-     * Default constructor.
+     * Constructor which will open the browser to the expected URL and maximize the window.
      */
     public MortgageCalculatorPage() {
         chromeDriver.get("https://www.mortgageloan.com/calculator");
+        waitForCalculatorToLoad();
         chromeDriver.manage().window().maximize();
+        waitForCalculatorToLoad();
     }
 
     /**
@@ -81,6 +83,15 @@ public class MortgageCalculatorPage {
     }
 
     /**
+     * The mortgage calculator widget.
+     *
+     * @return WebElement - the mortgage calculator.
+     */
+    private WebElement calculator() {
+        return chromeDriver.findElement(By.id("calculator-form-wizard"));
+    }
+
+    /**
      * The 'Home Value' input element.
      *
      * @return WebElement - the element found by its id.
@@ -117,12 +128,30 @@ public class MortgageCalculatorPage {
     }
 
     /**
-     * The 'Your Monthly Payments Could Be' label displaying the calculated results.
+     * The 'Loan To Value Ratio' results label.
      *
-     * @return WebElement - the label displaying the resulting monthly payment amount, found by its css locator.
+     * @return WebElement - the label displaying the resulting Loan To Value Ratio, found by its xpath locator.
+     */
+    private WebElement loanToValueRatioResultLabel() {
+        return chromeDriver.findElement(By.xpath("//th[text()='Loan To Value Ratio']/..//td"));
+    }
+
+    /**
+     * The 'Total Monthly Payments' results label.
+     *
+     * @return WebElement - the label displaying the resulting monthly payment amount, found by its xpath locator.
      */
     private WebElement monthlyPaymentResultLabel() {
-        return chromeDriver.findElement(By.cssSelector("#calculator_result > div.cta-amount"));
+        return chromeDriver.findElement(By.xpath("//th[text()='Total Monthly Payments']/..//td"));
+    }
+
+    /**
+     * The 'Monthly Principal & Interests' label displaying the calculated results.
+     *
+     * @return WebElement - the label displaying the resulting principal and interest payments, found by its xpath locator.
+     */
+    private WebElement monthlyPrincipleAndInterestsLabel() {
+        return chromeDriver.findElement(By.xpath("//th[text()='Monthly Principal & Interests']/..//td"));
     }
 
     /**
@@ -234,7 +263,7 @@ public class MortgageCalculatorPage {
      * Click the 'Next' button.
      */
     public void clickNextButton() {
-        scrollToElement(nextButton());
+        scrollToElement(calculator());
         nextButton().click();
     }
 
@@ -242,24 +271,37 @@ public class MortgageCalculatorPage {
      * Click the 'Show Results' button.
      */
     public void clickShowResultsButton() {
-        scrollToElement(showResultsButton());
+        scrollToElement(calculator());
         showResultsButton().click();
     }
 
     /**
-     * Retrieve the "Your Monthly Payments Could Be" amount displayed on the results page.
+     * Retrieve the "Total Monthly Payments" amount displayed on the results page.
      */
     public String getMonthlyPaymentResult() {
-        scrollToElement(monthlyPaymentResultLabel());
         return monthlyPaymentResultLabel().getText();
     }
 
     /**
-     * Wait no longer than 2 seconds for the calculator to appear.
+     * Retrieve the "Monthly Principal & Interests" amount displayed on the results page.
+     */
+    public String getMonthlyPrincipleAndInterestsResult() {
+        return monthlyPrincipleAndInterestsLabel().getText();
+    }
+
+    /**
+     * Retrieve the "Loan To Value Ratio" amount displayed on the results page.
+     */
+    public String getLoanToValueRatioResult() {
+        return loanToValueRatioResultLabel().getText();
+    }
+
+    /**
+     * Wait no longer than 10 seconds for the calculator to appear.
      */
     public void waitForCalculatorToLoad() {
-        WebDriverWait wait = new WebDriverWait(chromeDriver, 10);
-        wait.until(ExpectedConditions.visibilityOf(nextButton()));
+        WebDriverWait wait = new WebDriverWait(chromeDriver, 10, 1000);
+        wait.until(ExpectedConditions.visibilityOf(calculator()));
     }
 
 }
