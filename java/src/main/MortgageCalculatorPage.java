@@ -54,69 +54,6 @@ public class MortgageCalculatorPage {
     //////////////////////////////////////////////////////////
 
     /**
-     * The 'Next' button.
-     *
-     * @return WebElement - the button found by its css locator.
-     */
-    private WebElement nextButton() {
-        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.next > a.next-button"));
-    }
-
-    /**
-     * The 'Show Results' button.
-     *
-     * @return WebElement - the button found by its css locator.
-     */
-    private WebElement showResultsButton() {
-        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.finish > a.finish-button"));
-    }
-
-    /**
-     * The 'Loan Amount' input element.
-     *
-     * @return WebElement - the element found by its id.
-     */
-    private WebElement loanAmountInput() {
-        return chromeDriver.findElement(By.id("calculator_widget_amount"));
-    }
-
-    /**
-     * The 'Length' input element.
-     *
-     * @return WebElement - the element found by its id.
-     */
-    private WebElement lengthOfLoanInput() {
-        return chromeDriver.findElement(By.id("calculator_widget_Length"));
-    }
-
-    /**
-     * The 'Interest Rate' input element.
-     *
-     * @return WebElement - the element found by its id.
-     */
-    private WebElement interestRateInput() {
-        return chromeDriver.findElement(By.id("calculator_widget_interest"));
-    }
-
-    /**
-     * The 'Home Value' input element.
-     *
-     * @return WebElement - the element found by its id.
-     */
-    private WebElement homeValueInput() {
-        return chromeDriver.findElement(By.id("calculator_widget_HomeValue"));
-    }
-
-    /**
-     * The 'Annual Taxes' input element.
-     *
-     * @return WebElement - the element found by its id.
-     */
-    private WebElement annualTaxesInput() {
-        return chromeDriver.findElement(By.id("calculator_widget_PropertyTaxes"));
-    }
-
-    /**
      * The 'Annual Insurance' input element.
      *
      * @return WebElement - the element found by its id.
@@ -135,6 +72,51 @@ public class MortgageCalculatorPage {
     }
 
     /**
+     * The 'Annual Taxes' input element.
+     *
+     * @return WebElement - the element found by its id.
+     */
+    private WebElement annualTaxesInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_PropertyTaxes"));
+    }
+
+    /**
+     * The 'Home Value' input element.
+     *
+     * @return WebElement - the element found by its id.
+     */
+    private WebElement homeValueInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_HomeValue"));
+    }
+
+    /**
+     * The 'Interest Rate' input element.
+     *
+     * @return WebElement - the element found by its id.
+     */
+    private WebElement interestRateInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_interest"));
+    }
+
+    /**
+     * The 'Length' input element.
+     *
+     * @return WebElement - the element found by its id.
+     */
+    private WebElement lengthOfLoanInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_Length"));
+    }
+
+    /**
+     * The 'Loan Amount' input element.
+     *
+     * @return WebElement - the element found by its id.
+     */
+    private WebElement loanAmountInput() {
+        return chromeDriver.findElement(By.id("calculator_widget_amount"));
+    }
+
+    /**
      * The 'Your Monthly Payments Could Be' label displaying the calculated results.
      *
      * @return WebElement - the label displaying the resulting monthly payment amount, found by its css locator.
@@ -143,9 +125,47 @@ public class MortgageCalculatorPage {
         return chromeDriver.findElement(By.cssSelector("#calculator_result > div.cta-amount"));
     }
 
+    /**
+     * The 'Next' button.
+     *
+     * @return WebElement - the button found by its css locator.
+     */
+    private WebElement nextButton() {
+        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.next > a.next-button"));
+    }
+
+    /**
+     * The 'Show Results' button.
+     *
+     * @return WebElement - the button found by its css locator.
+     */
+    private WebElement showResultsButton() {
+        return chromeDriver.findElement(By.cssSelector("#calculator-form > div > ul > li.finish > a.finish-button"));
+    }
+
     //////////////////////////////////////////////////////////
     // Helper methods.
     //////////////////////////////////////////////////////////
+
+    /**
+     * Ensure that we can access the element by scrolling to it.
+     *
+     * @param element WebElement - the element to scroll to.
+     */
+    private void scrollToElement(final WebElement element) {
+        ((JavascriptExecutor)chromeDriver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    /**
+     * Given a specified input element, enter in the input text.
+     *
+     * @param inputElement WebElement - the input element to enter text into.
+     * @param input String - the text to enter into the input element.
+     */
+    private void enter(WebElement inputElement, final String input) {
+        inputElement.clear();
+        inputElement.sendKeys(input);
+    }
 
     /**
      * Enter the 'Loan Amount' value.
@@ -153,8 +173,7 @@ public class MortgageCalculatorPage {
      * @param loanAmount String - the amount requested for the loan, as whole dollars.
      */
     public void setLoanAmount(final String loanAmount) {
-        loanAmountInput().clear();
-        loanAmountInput().sendKeys(loanAmount);
+        enter(loanAmountInput(), loanAmount);
     }
 
     /**
@@ -163,8 +182,7 @@ public class MortgageCalculatorPage {
      * @param rate String - the interest rate as a percentage.
      */
     public void setInterestRate(final String rate) {
-        interestRateInput().clear();
-        interestRateInput().sendKeys(rate);
+        enter(interestRateInput(), rate);
     }
 
     /**
@@ -173,8 +191,7 @@ public class MortgageCalculatorPage {
      * @param length String - the length of time in years.
      */
     public void setLengthOfLoan(final String length) {
-        lengthOfLoanInput().clear();
-        lengthOfLoanInput().sendKeys(length);
+        enter(lengthOfLoanInput(), length);
     }
 
     /**
@@ -183,8 +200,7 @@ public class MortgageCalculatorPage {
      * @param homeValue String - the value of the home.
      */
     public void setHomeValue(final String homeValue) {
-        homeValueInput().clear();
-        homeValueInput().sendKeys(homeValue);
+        enter(homeValueInput(), homeValue);
     }
 
     /**
@@ -193,8 +209,7 @@ public class MortgageCalculatorPage {
      * @param taxesAsAmount String - the whole dollar amount of annual taxes paid.
      */
     public void setAnnualTaxes(final String taxesAsAmount) {
-        annualTaxesInput().clear();
-        annualTaxesInput().sendKeys(taxesAsAmount);
+        enter(annualTaxesInput(), taxesAsAmount);
     }
 
     /**
@@ -203,8 +218,7 @@ public class MortgageCalculatorPage {
      * @param insurancePaid String - the whole dollar amount of annual insurance paid.
      */
     public void setAnnualInsurance(final String insurancePaid) {
-        annualInsuranceInput().clear();
-        annualInsuranceInput().sendKeys(insurancePaid);
+        enter(annualInsuranceInput(), insurancePaid);
     }
 
     /**
@@ -213,8 +227,7 @@ public class MortgageCalculatorPage {
      * @param pmiAmount String - the annual PMI percentage.
      */
     public void setAnnualPmi(final String pmiAmount) {
-        annualPmiInput().clear();
-        annualPmiInput().sendKeys(pmiAmount);
+        enter(annualPmiInput(), pmiAmount);
     }
 
     /**
@@ -247,15 +260,6 @@ public class MortgageCalculatorPage {
     public void waitForCalculatorToLoad() {
         WebDriverWait wait = new WebDriverWait(chromeDriver, 10);
         wait.until(ExpectedConditions.visibilityOf(nextButton()));
-    }
-
-    /**
-     * Ensure that we can access the element by scrolling to it.
-     *
-     * @param element WebElement - the element to scroll to.
-     */
-    private void scrollToElement(final WebElement element) {
-        ((JavascriptExecutor)chromeDriver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
 }

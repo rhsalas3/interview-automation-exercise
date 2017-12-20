@@ -14,13 +14,9 @@ public class VerifyExpectedMonthlyLoanPayment {
     private String annualPmiPercentage;
 
     // Expected result values.
-    private String monthlyPrinciple;
-    private String monthlyRealEstateTax;
-    private String monthlyInsurance;
-    private String loanToValueRatio;
-    private String monthsWithPmi;
-    private String monthlyPmiPayment;
-    private String totalyMonthlyPayment;
+    private String expectedMonthlyPrinciple;
+    private String expectedLoanToValueRatio;
+    private String expectedTotalyMonthlyPayment;
     
     // The page object representing the mortgage calculator.
     private MortgageCalculatorPage calculatorPage;
@@ -36,14 +32,10 @@ public class VerifyExpectedMonthlyLoanPayment {
         annualPmiPercentage = "0.52";   // 0.52 %
         
         // Initialize the expected resulting values.
-        monthlyPrinciple     = "$1,342.05";
-        monthlyRealEstateTax = "$250.00";
-        monthlyInsurance     = "$125.00";
-        loanToValueRatio     = "83.33%";
-        monthsWithPmi        = "31";
-        monthlyPmiPayment    = "$104.17";
-        totalyMonthlyPayment = "$1,821.22";
-        
+        expectedMonthlyPrinciple     = "$1,073.64";
+        expectedLoanToValueRatio     = "85.11%";
+        expectedTotalyMonthlyPayment = "$1,482.39";
+
         // Initialize the mortgage calculator page object.
         calculatorPage = new MortgageCalculatorPage();
     }
