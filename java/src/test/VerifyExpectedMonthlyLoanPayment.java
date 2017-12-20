@@ -50,8 +50,9 @@ public class VerifyExpectedMonthlyLoanPayment {
 
     @Test
     public void testMortgageCalculator() {
-        // Run test setup.
+        // Run test setup and wait for the calculator to appear.
         setup();
+        calculatorPage.waitForCalculatorToLoad();
 
         // Enter in the "Loan Information" and the "Home Value".
         assertTrue("Expected to be at the 'Loan Information' step.", calculatorPage.atLoansInformationInputPage());
