@@ -3,9 +3,12 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * A simple test of the https://www.mortgageloan.com/calculator page which verifies expected 'Total Monthly Payments'.
+ */
 public class VerifyExpectedMonthlyLoanPayment {
 
-    // Input values
+    // Input values.
     private String annualInsurance;
     private String annualPmiPercentage;
     private String annualTaxes;
@@ -22,6 +25,9 @@ public class VerifyExpectedMonthlyLoanPayment {
     // The page object representing the mortgage calculator.
     private MortgageCalculatorPage calculatorPage;
 
+    /**
+     * Setup the test by initializing input and expected data, and the page object.
+     */
     private void setup() {
         // Set the amounts to be entered for the loan information.
         loanAmount          = "200000"; // $200,000
@@ -45,7 +51,6 @@ public class VerifyExpectedMonthlyLoanPayment {
     public void testMortgageCalculator() {
         // Run test setup and wait for the calculator to appear.
         setup();
-        calculatorPage.waitForCalculatorToLoad();
 
         // Enter in the "Loan Information" and the "Home Value".
         assertTrue("Expected to be at the 'Loan Information' step.", calculatorPage.atLoansInformationInputPage());

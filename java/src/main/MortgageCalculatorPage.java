@@ -1,10 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Class representing the https://www.mortgageloan.com/calculator page.
@@ -18,7 +17,6 @@ public class MortgageCalculatorPage {
      */
     public MortgageCalculatorPage() {
         chromeDriver.get("https://www.mortgageloan.com/calculator");
-        waitForCalculatorToLoad();
         chromeDriver.manage().window().maximize();
         waitForCalculatorToLoad();
     }
@@ -28,6 +26,31 @@ public class MortgageCalculatorPage {
      */
     public void quitDriver() {
         chromeDriver.quit();
+    }
+
+    /**
+     * Wait no longer than 10 seconds for the calculator to appear.
+     */
+    public void waitForCalculatorToLoad() {
+        final long waitTime   = 500;   // Wait period, 1/2 seconds.
+        final long maxTimeout = 10000; // Timeout after 10 seconds.
+        // While the total wait time is less than or equal to the timeout, wait for 1/2 second until the calculator is present.
+        for (long i = 0; i < maxTimeout; i += waitTime) {
+            // Check whether the calculator has appeared.
+            try {
+                if (calculator().isDisplayed()) {
+                    break;
+                }
+            } catch (NoSuchElementException noElement) {
+                // If the calculator has not appeared, wait, then check again.
+                try {
+                    System.out.println(String.format("Waiting for calculator to appear... %s milliseconds", i));
+                    Thread.sleep(waitTime);
+                } catch (InterruptedException interruption) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
     }
 
     /**
@@ -294,14 +317,6 @@ public class MortgageCalculatorPage {
      */
     public String getLoanToValueRatioResult() {
         return loanToValueRatioResultLabel().getText();
-    }
-
-    /**
-     * Wait no longer than 10 seconds for the calculator to appear.
-     */
-    public void waitForCalculatorToLoad() {
-        WebDriverWait wait = new WebDriverWait(chromeDriver, 10, 1000);
-        wait.until(ExpectedConditions.visibilityOf(calculator()));
     }
 
 }
